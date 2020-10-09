@@ -73,10 +73,14 @@
     <div class="d-md-none d-sm-block">
         <div class="caixaCadastroP mt-4 text-white">
             <h2 class="text-center titulo">Cadastro</h2>
-            <form class="form-row mt-2">
+            <form action="<?php echo base_url("index.php/Cadastro/validarCadastro"); ?>" method="POST" id="cadastroResponsivo" class="form-row mt-2">
                 <div class="form-group mx-auto col-12">
                     <label for="nome">Nome</label>
                     <input type="text" class="form-control" id="nome" name="nome">
+                </div>
+                <div class="form-group mx-auto col-12">
+                    <label for="userName" class="">Nome de Usuário</label>
+                    <input type="text" class="form-control" id="userName" name="userName">
                 </div>
                 <div class="form-group mx-auto col-12">
                     <label for="email">E-mail</label>

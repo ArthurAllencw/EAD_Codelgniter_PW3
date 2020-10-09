@@ -7,7 +7,7 @@ class Login extends CI_Controller {
 
         $usuario = $this->input->post("user");
         //user e pass é o name do input da view/form
-        $senha = $this->input->post("pass");
+        $senha = $this->input->post("pass");     
 
         if(empty($usuario)){
             echo "ErroUsuario";
@@ -19,7 +19,21 @@ class Login extends CI_Controller {
             die();
         }
 
-        echo "Sucesso";
+        $this->load->model('LoginModel');
+        $resultado = $this->LoginModel->logarUsuario($usuario, $senha);
+        if(empty($resultado)){
+            echo "ErroLogin";
+        }
+        else{
+            switch($resultado['tipo']){
+                case 'cliente':
+                    echo "SucessoCliente";
+                    break;
+                default:
+                echo "ErroLogin";
+                break;
+            }
+        }
         
     }
 }

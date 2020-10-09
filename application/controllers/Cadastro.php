@@ -15,6 +15,8 @@ class Cadastro extends CI_Controller {
         ];
         $confSenha = $this->input->post("confSenha");
 
+        $this->load->model('CadastrosModel');
+
         if(empty($dados['nome'])){
             echo "ErroNome";
             die();
@@ -25,13 +27,34 @@ class Cadastro extends CI_Controller {
             die();
         }
 
+        $linhaUser = $this->CadastrosModel->VerificarUserName($dados['userName']);
+
+        if(!empty($linhaUser['userName'])){
+            echo "ErroUsuarioExiste";
+            die();
+        }
+
         if(empty($dados['cpf'])){
             echo "ErroCPF";
             die();
         }
 
+        $linhaCPF = $this->CadastrosModel->VerificarCPF($dados['cpf']);
+
+        if(!empty($linhaCPF['cpf'])){
+            echo "ErroCpfExiste";
+            die();
+        }
+
         if(empty($dados['email'])){
             echo "ErroEmail";
+            die();
+        }
+
+        $linhaEmail = $this->CadastrosModel->VerificarEmail($dados['email']);
+
+        if(!empty($linhaEmail['email'])){
+            echo "ErroEmailExiste";
             die();
         }
 
@@ -49,8 +72,6 @@ class Cadastro extends CI_Controller {
             echo "ErroSenhaNaoConfere";
             die();
         }
-
-        $this->load->model('CadastrosModel');
 
         if($this->CadastrosModel->CadastrarUsuario($dados)){
             echo "Sucesso";
