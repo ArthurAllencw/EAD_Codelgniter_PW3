@@ -13,9 +13,11 @@ class Cadastro extends CI_Controller {
             'tipo' => "cliente",
             'cpf' => $this->input->post("cpf"), 
         ];
+        $this->load->model('CadastrosModel');
+
         $confSenha = $this->input->post("confSenha");
 
-        $this->load->model('CadastrosModel');
+        $this->session->email = $dados['email'];
 
         if(empty($dados['nome'])){
             echo "ErroNome";

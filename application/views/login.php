@@ -35,7 +35,17 @@
                 <div class="mt-4 ">
                     <div class="form-group mx-auto col-10">
                         <label for="user" class="text-white">Usuário ou E-mail</label>
-                        <input type="text" class="form-control" id="user" name="user">
+                        <input type="text" class="form-control" id="user" name="user"
+                        value="<?php
+                            if(isset($this->session->email))
+                            {
+                                echo $this->session->email;
+                            }
+                            if(isset($this->session->email))
+                            {
+                                $this->session->session_destroy;
+                            }          
+                            ?>">
                     </div>
                     <div class="form-group mx-auto col-10">
                         <label for="pass" class="text-white">Senha</label>
